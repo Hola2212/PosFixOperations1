@@ -9,6 +9,9 @@ public class ArrayStack<T> implements IStack<T>{
 
     @Override
     public T pop() {
+        if (empty()){
+            throw new IllegalArgumentException("Stack is empty. Can't remove any data.");
+        }
         return items.removeLast();
     }
 
@@ -19,6 +22,9 @@ public class ArrayStack<T> implements IStack<T>{
 
     @Override
     public T top() {
+        if (empty()){
+            throw new IllegalArgumentException("Stack is empty. Can't retrieve any data.");
+        }
         return items.getLast();
     }
 }
