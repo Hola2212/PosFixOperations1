@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArrayStackTest {
-    private IStack<Integer> items;
+    private Stack<Integer> items;
     @BeforeEach
     void SetUp(){
         this.items = new ArrayStack<>();

@@ -1,6 +1,6 @@
-import java.util.ArrayList;
-public class ArrayStack<T> implements IStack<T>{
-    private ArrayList<T> items = new ArrayList<>();
+import java.util.Vector;
+public class ArrayStack<T> implements Stack<T>{
+    private Vector<T> items = new Vector<>();
 
     @Override
     public void push(T data){
