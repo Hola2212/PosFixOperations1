@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PosFixOperations1.iml" filepath="$PROJECT_DIR$/PosFixOperations1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/target/target.iml" filepath="$PROJECT_DIR$/target/target.iml" />
     </modules>
   </component>
 </project>
