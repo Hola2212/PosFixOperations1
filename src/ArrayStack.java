@@ -9,20 +9,15 @@ public class ArrayStack<T> implements Stack<T>{
 
     @Override
     public T pop() {
-        if (empty()){
+        if (items.isEmpty()){
             throw new IllegalArgumentException("Stack is empty. Can't remove any data.");
         }
         return items.removeLast();
     }
 
     @Override
-    public boolean empty() {
-        return items.isEmpty();
-    }
-
-    @Override
-    public T top() {
-        if (empty()){
+    public T peek() {
+        if (items.isEmpty()){
             throw new IllegalArgumentException("Stack is empty. Can't retrieve any data.");
         }
         return items.getLast();

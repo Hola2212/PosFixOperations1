@@ -14,20 +14,13 @@ class ArrayStackTest {
     @Test
     void EmptyStackTopShowsError() {
         assertThrows(IllegalArgumentException.class, ()->
-                items.top());
+                items.peek());
     }
 
     @Test
     void PushAndTopWork() {
         items.push(4);
-        assertEquals(4,items.top());
-    }
-
-    @Test
-    void IsItEmpty() {
-        assertTrue(items.empty());
-        items.push(2);
-        assertFalse(items.empty());
+        assertEquals(4,items.peek());
     }
 
     @Test
