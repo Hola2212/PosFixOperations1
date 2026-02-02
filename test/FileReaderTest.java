@@ -18,7 +18,7 @@ class FileReaderTest {
         x.add("1 2 + 4 / 3 +");
         x.add("1 2 - 4 * 3 +");
         x.add("1 2 + 4 - 3 +");
-        Vector<String> text = test.ReadFile();
+        Vector<String> text = test.ReadFile("target/data.txt");
         assertEquals(x.size(), text.size());
         assertEquals(x.toString(), text.toString());
     }

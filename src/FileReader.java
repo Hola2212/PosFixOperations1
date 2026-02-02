@@ -4,11 +4,8 @@ import java.util.Scanner;             // Import the Scanner class to read text f
 import java.util.Vector;
 
 public class FileReader {
-    private final File myObj;
-    public FileReader() {
-        this.myObj = new File("target/data.txt");
-    }
-    public Vector<String> ReadFile() {
+    public Vector<String> ReadFile(String target) {
+        File myObj = new File(target);
         Vector<String> ans = new Vector<>();
         try (Scanner myReader = new Scanner(myObj)) {
             while (myReader.hasNextLine()) {
