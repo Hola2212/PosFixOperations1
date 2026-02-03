@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
-        ArrayStack<Integer> prueba = new ArrayStack<>();
-        System.out.println(prueba.empty());
+        Stack<Float> prueba = new ArrayStack<>();
+        //System.out.println(prueba.empty());
     }
 }
