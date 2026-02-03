@@ -30,3 +30,23 @@ public class PostfiProcessor implements Calc{
                         throw new IndexOutOfBoundsException("There aren't enough values to operate");
                     }
                     break;
+                    case "-":
+                    try {
+                        num1 = actual.pop();
+                        num2 = actual.pop();
+                        this.result = num2 - num1;
+                        actual.push(this.result);
+                    } catch (Exception e) {
+                        throw new IndexOutOfBoundsException("There aren't enough values to operate");
+                    }
+                    break;
+                case "*":
+                    try {
+                        num1 = actual.pop();
+                        num2 = actual.pop();
+                        this.result = num2 * num1;
+                        actual.push(this.result);
+                    } catch (Exception e) {
+                        throw new IndexOutOfBoundsException("There aren't enough values to operate");
+                    }
+                    break;
