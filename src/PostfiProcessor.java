@@ -1,8 +1,11 @@
+import java.util.Stack;
+
 public class PostfiProcessor implements Calc{
-    private String expression;
-    private ArrayStack<Integer> numbersStack;
-    @Override
-    public int Operate(String expression){
-        return 0;
+    private String[] separados;
+    private Stack<Float> numbersArray = new ArrayStack<>();
+    private Stack<Float> numbersVector = new VectorStack<>();
+    private Stack<Float> actual;
+    private float result;
+    public PostfiProcessor(){
+        this.actual = this.numbersVector;
     }
-}
