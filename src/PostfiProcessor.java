@@ -50,3 +50,26 @@ public class PostfiProcessor implements Calc{
                         throw new IndexOutOfBoundsException("There aren't enough values to operate");
                     }
                     break;
+                    case "/":
+                    try {
+                        num1 = actual.pop();
+                        num2 = actual.pop();
+                        this.result = num2 / num1;
+                        actual.push(this.result);
+                    } catch (Exception e) {
+                        throw new IndexOutOfBoundsException("There aren't enough values to operate");
+                    }
+                    break;
+                default:
+                    throw new IllegalArgumentException("There is an illegal symbol on the expression.");
+            }
+        }
+        return (actual.pop()).toString();
+    }
+    public void ChangeToArray(){
+        this.actual = this.numbersArray;
+    }
+    public void ChangeToVector(){
+        this.actual = this.numbersVector;
+    }
+
