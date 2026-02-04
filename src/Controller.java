@@ -26,3 +26,42 @@ public class Controller {
         imp.println("Se ha inicializado el programa. Se inicia por default con Stack de Vectores. Escoja la opcion a realizar: ");
     }
 }
+public void menuInteraction(){
+        imp.println("\t1) Cambiar a Stack de Vectores. \n\t2) Cambiar a Stack de ArrayList \n\t3) Operar instrucciones guardadas en data.txt \n\t Salir");
+        int opcion = EnterOnlyIntegers();
+        switch(opcion) {
+            case 1 -> {
+                calculator.ChangeToVector();
+                menuInteraction();
+            }
+            case 2 -> {
+                calculator.ChangeToArray();
+                menuInteraction();
+            }
+            case 3 -> {
+                this.fileControl.DeleteFile(this.resultTarget);
+                this.fileControl.CreateFile(this.resultTarget);
+                Vector<String> lineas = this.fileControl.ReadFile(this.dataTarget);
+                Vector<String> results = new Vector<>();
+                for (int i = 0; i < lineas.size(); i++) {
+                    String result = this.calculator.operate(lineas.get(i));
+                    results.add(result);
+                }
+                showResults(results);
+                menuInteraction();
+            }
+            case 4 -> {
+                System.exit(0);
+            }
+            default -> {
+                imp.println("Invalid option.");
+                menuInteraction();
+            }
+        }
+    }
+    public void showResults(Vector<String> results){
+        this.fileControl.WriteToTarget(this.resultTarget, results);
+        for (int i = 0; i < results.size(); i++) {
+            imp.println(results.get(i));
+        }
+    }
