@@ -1,3 +1,6 @@
+/**
+ * Postif Operations Calculator class
+ */
 public class PostfiProcessor implements Calc{
     private String[] separados;
     private Stack<Float> numbersArray = new ArrayStack<Float>();
@@ -7,6 +10,12 @@ public class PostfiProcessor implements Calc{
     public PostfiProcessor(){
         this.actualStack = this.numbersVector;
     }
+
+    /**
+     * @param text
+     * @return result of the expression
+     * @throws IndexOutOfBoundsException when the signs are badly placed, ending in not enough data to operate
+     */
     @Override
     public float Operate(String text){
         this.separados = text.split(" ");
@@ -65,9 +74,16 @@ public class PostfiProcessor implements Calc{
         }
         return (float)(this.actualStack.pop());
     }
+
+    /**
+     *  Used to change the method of the Stack to ArrayLists
+     */
     public void ChangeToArray(){
         this.actualStack = this.numbersArray;
     }
+    /**
+     *  Used to change the method of the Stack to Vectors
+     */
     public void ChangeToVector(){ this.actualStack = this.numbersVector;}
     }
 

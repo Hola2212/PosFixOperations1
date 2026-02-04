@@ -1,5 +1,8 @@
 import java.util.Vector;
 
+/**
+ * Organizer for all the files operations
+ */
 public class FilesManagment {
     private FileCreator creador;
     private FileDeleter borrador;

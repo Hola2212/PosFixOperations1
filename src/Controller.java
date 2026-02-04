@@ -9,6 +9,9 @@ public class Controller {
     private String dataTarget;
     private String resultTarget;
 
+    /**
+     * Main logicall controler and UI
+     */
     public Controller() {
         this.imp = System.out;
         this.sc = new Scanner(System.in);
@@ -17,6 +20,9 @@ public class Controller {
         this.resultTarget = "target/results.txt";
     }
 
+    /**
+     * @return input but only if it is Integer
+     */
     public int EnterOnlyIntegers() {
         while (!sc.hasNextInt()) {
             System.out.println("Input is not an Integer.");
@@ -25,10 +31,17 @@ public class Controller {
         return sc.nextInt();
     }
 
+    /**
+     * Initial Statement of the program shown to the User
+     */
     public void Initialize() {
         imp.println("Se ha inicializado el programa. Se inicia por default con Stack de Vectores. Escoja la opcion a realizar: ");
+        menuInteraction();
     }
 
+    /**
+     * Control of action the User can ask to do
+     */
     public void menuInteraction() {
         imp.println("\t1) Cambiar a Stack de Vectores. \n\t2) Cambiar a Stack de ArrayList \n\t3) Operar instrucciones guardadas en data.txt \n\t Salir");
         int opcion = EnterOnlyIntegers();
@@ -63,6 +76,10 @@ public class Controller {
         }
     }
 
+    /**
+     * @param results
+     * Shows the results to the User and saves them in another document
+     */
     public void showResults(Vector<String> results) {
         this.fileControl.WriteToTarget(this.resultTarget, results);
         for (int i = 0; i < results.size(); i++) {
