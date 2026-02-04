@@ -1,61 +1,60 @@
-import java.util.Stack;
-
 public class PostfiProcessor implements Calc{
     private String[] separados;
-    private Stack<Float> numbersArray = new ArrayStack<>();
-    private Stack<Float> numbersVector = new VectorStack<>();
-    private Stack<Float> actual;
+    private Stack<Float> numbersArray = new ArrayStack<Float>();
+    private Stack<Float> numbersVector = new VectorStack<Float>();
+    private Stack<Float> actualStack;
     private float result;
     public PostfiProcessor(){
-        this.actual = this.numbersVector;
+        this.actualStack = this.numbersVector;
     }
-     @Override
-    public String operate(String text){
+    @Override
+    public float Operate(String text){
         this.separados = text.split(" ");
-        int num1 = 0;
-        int num2 = 0;
+        float num1 = 0;
+        float num2 = 0;
         for (int i = 0; i < this.separados.length; i++){
             String actual = this.separados[i];
             switch (actual) {
                 case "0","1","2","3","4","5","6","7","8","9":
-                    actual.push(Float.parseFloat(actual));
+                    float aux = Float.parseFloat(actual);
+                    this.actualStack.push(aux);
                     break;
                 case "+":
                     try {
-                        num1 = actual.pop();
-                        num2 = actual.pop();
+                        num1 = this.actualStack.pop();
+                        num2 = this.actualStack.pop();
                         this.result = num2 + num1;
-                        actual.push(this.result);
+                        this.actualStack.push(this.result);
                     } catch (Exception e) {
                         throw new IndexOutOfBoundsException("There aren't enough values to operate");
                     }
                     break;
                     case "-":
                     try {
-                        num1 = actual.pop();
-                        num2 = actual.pop();
+                        num1 = this.actualStack.pop();
+                        num2 = this.actualStack.pop();
                         this.result = num2 - num1;
-                        actual.push(this.result);
+                        this.actualStack.push(this.result);
                     } catch (Exception e) {
                         throw new IndexOutOfBoundsException("There aren't enough values to operate");
                     }
                     break;
                 case "*":
                     try {
-                        num1 = actual.pop();
-                        num2 = actual.pop();
+                        num1 = this.actualStack.pop();
+                        num2 = this.actualStack.pop();
                         this.result = num2 * num1;
-                        actual.push(this.result);
+                        this.actualStack.push(this.result);
                     } catch (Exception e) {
                         throw new IndexOutOfBoundsException("There aren't enough values to operate");
                     }
                     break;
                     case "/":
                     try {
-                        num1 = actual.pop();
-                        num2 = actual.pop();
+                        num1 = this.actualStack.pop();
+                        num2 = this.actualStack.pop();
                         this.result = num2 / num1;
-                        actual.push(this.result);
+                        this.actualStack.push(this.result);
                     } catch (Exception e) {
                         throw new IndexOutOfBoundsException("There aren't enough values to operate");
                     }
@@ -64,12 +63,11 @@ public class PostfiProcessor implements Calc{
                     throw new IllegalArgumentException("There is an illegal symbol on the expression.");
             }
         }
-        return (actual.pop()).toString();
+        return (float)(this.actualStack.pop());
     }
     public void ChangeToArray(){
-        this.actual = this.numbersArray;
+        this.actualStack = this.numbersArray;
     }
-    public void ChangeToVector(){
-        this.actual = this.numbersVector;
+    public void ChangeToVector(){ this.actualStack = this.numbersVector;}
     }
 
