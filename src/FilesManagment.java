@@ -17,7 +17,7 @@ public class FilesManagment {
     public void DeleteFile(String target) {
         this.borrador.DeleteFile(target);
     }
-    public void WriteToTarget(String target, String[] text){
+    public void WriteToTarget(String target, Vector<String> text){
         this.escritor.WriteToTarget(target,text);
     }
     public Vector<String> ReadFile(String target) { return this.lector.ReadFile(target); }

@@ -1,8 +1,9 @@
 import java.io.FileWriter;   // Import the FileWriter class
 import java.io.IOException;  // Import the IOException class
+import java.util.Vector;
 
 public class FileWritter {
-    public void WriteToTarget(String target, String[] text){
+    public void WriteToTarget(String target, Vector<String> text){
         try {
             FileWriter myWriter = new FileWriter(target);
             for (String s : text) {
