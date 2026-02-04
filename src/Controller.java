@@ -16,6 +16,7 @@ public class Controller {
         this.imp = System.out;
         this.sc = new Scanner(System.in);
         this.calculator = new PostfiProcessor();
+        this.fileControl = new FilesManagment();
         this.dataTarget = "target/data.txt";
         this.resultTarget = "target/results.txt";
     }
