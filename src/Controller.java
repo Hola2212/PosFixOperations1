@@ -44,7 +44,7 @@ public class Controller {
      * Control of action the User can ask to do
      */
     public void menuInteraction() {
-        imp.println("\t1) Cambiar a Stack de Vectores. \n\t2) Cambiar a Stack de ArrayList \n\t3) Operar instrucciones guardadas en data.txt \n\t Salir");
+        imp.println("\t1) Cambiar a Stack de Vectores. \n\t2) Cambiar a Stack de ArrayList \n\t3) Operar instrucciones guardadas en data.txt \n\t4) Salir");
         int opcion = EnterOnlyIntegers();
         switch (opcion) {
             case 1 -> {
