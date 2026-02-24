@@ -23,7 +23,7 @@ public class VectorStack<T> implements Stack<T>{
         if (items.isEmpty()){
             throw new IllegalArgumentException("Stack is empty. Can't remove any data.");
         }
-        return items.removeLast();
+        return items.remove(items.size() - 1);
     }
 
     /**
@@ -35,6 +35,6 @@ public class VectorStack<T> implements Stack<T>{
         if (items.isEmpty()){
             throw new IllegalArgumentException("Stack is empty. Can't retrieve any data.");
         }
-        return items.getLast();
+        return items.get(items.size() - 1);
     }
 }

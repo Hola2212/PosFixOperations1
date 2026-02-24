@@ -1,89 +1,59 @@
 /**
  * Postif Operations Calculator class
  */
-public class PostfiProcessor implements Calc{
-    private String[] separados;
-    private Stack<Float> numbersArray = new ArrayStack<Float>();
-    private Stack<Float> numbersVector = new VectorStack<Float>();
-    private Stack<Float> actualStack;
-    private float result;
-    public PostfiProcessor(){
-        this.actualStack = this.numbersVector;
+public class PostfiProcessor implements Calc {
+    private static PostfiProcessor instance;
+    private Stack<Float> stack;
+
+    private PostfiProcessor() {
+        stack = StackFactory.createStack(StackType.VECTOR); // default
     }
 
+    public static PostfiProcessor getInstance() {
+        if (instance == null) {
+            instance = new PostfiProcessor();
+        }
+        return instance;
+    }
+
+    public void setStackType(StackType type){
+        stack = StackFactory.createStack(type);
+    }
     /**
      * @param text
      * @return result of the expression
      * @throws IndexOutOfBoundsException when the signs are badly placed, ending in not enough data to operate
      */
     @Override
-    public float Operate(String text){
-        this.separados = text.split(" ");
-        float num1 = 0;
-        float num2 = 0;
-        for (int i = 0; i < this.separados.length; i++){
-            String actual = this.separados[i];
-            switch (actual) {
-                case "0","1","2","3","4","5","6","7","8","9":
-                    float aux = Float.parseFloat(actual);
-                    this.actualStack.push(aux);
-                    break;
-                case "+":
-                    try {
-                        num1 = this.actualStack.pop();
-                        num2 = this.actualStack.pop();
-                        this.result = num2 + num1;
-                        this.actualStack.push(this.result);
-                    } catch (Exception e) {
-                        throw new IndexOutOfBoundsException("There aren't enough values to operate");
-                    }
-                    break;
-                    case "-":
-                    try {
-                        num1 = this.actualStack.pop();
-                        num2 = this.actualStack.pop();
-                        this.result = num2 - num1;
-                        this.actualStack.push(this.result);
-                    } catch (Exception e) {
-                        throw new IndexOutOfBoundsException("There aren't enough values to operate");
-                    }
-                    break;
-                case "*":
-                    try {
-                        num1 = this.actualStack.pop();
-                        num2 = this.actualStack.pop();
-                        this.result = num2 * num1;
-                        this.actualStack.push(this.result);
-                    } catch (Exception e) {
-                        throw new IndexOutOfBoundsException("There aren't enough values to operate");
-                    }
-                    break;
-                    case "/":
-                    try {
-                        num1 = this.actualStack.pop();
-                        num2 = this.actualStack.pop();
-                        this.result = num2 / num1;
-                        this.actualStack.push(this.result);
-                    } catch (Exception e) {
-                        throw new IndexOutOfBoundsException("There aren't enough values to operate");
-                    }
-                    break;
-                default:
-                    throw new IllegalArgumentException("There is an illegal symbol on the expression.");
+    public float Operate(String text) {
+        String[] tokens = text.split(" ");
+        for (String token : tokens) {
+
+            switch (token) {
+                case "+" -> {
+                    float a = stack.pop();
+                    float b = stack.pop();
+                    stack.push(b + a);
+                }
+                case "-" -> {
+                    float a = stack.pop();
+                    float b = stack.pop();
+                    stack.push(b - a);
+                }
+                case "*" -> {
+                    float a = stack.pop();
+                    float b = stack.pop();
+                    stack.push(b * a);
+                }
+                case "/" -> {
+                    float a = stack.pop();
+                    float b = stack.pop();
+                    stack.push(b / a);
+                }
+                default -> stack.push(Float.parseFloat(token));
             }
         }
-        return (float)(this.actualStack.pop());
+        return stack.pop();
     }
-
-    /**
-     *  Used to change the method of the Stack to ArrayLists
-     */
-    public void ChangeToArray(){
-        this.actualStack = this.numbersArray;
-    }
-    /**
-     *  Used to change the method of the Stack to Vectors
-     */
-    public void ChangeToVector(){ this.actualStack = this.numbersVector;}
-    }
+}
 

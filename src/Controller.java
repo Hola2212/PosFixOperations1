@@ -1,13 +1,14 @@
 import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.Vector;
+
 public class Controller {
     private final PrintStream imp;
     private final Scanner sc;
     private PostfiProcessor calculator;
     private FilesManagment fileControl;
-    private String dataTarget;
-    private String resultTarget;
+    private final String dataTarget = "target/data.txt";
+    private final String resultTarget = "target/results.txt";
 
     /**
      * Main logicall controler and UI
@@ -15,10 +16,8 @@ public class Controller {
     public Controller() {
         this.imp = System.out;
         this.sc = new Scanner(System.in);
-        this.calculator = new PostfiProcessor();
+        this.calculator = PostfiProcessor.getInstance();
         this.fileControl = new FilesManagment();
-        this.dataTarget = "target/data.txt";
-        this.resultTarget = "target/results.txt";
     }
 
     /**
@@ -44,32 +43,22 @@ public class Controller {
      * Control of action the User can ask to do
      */
     public void menuInteraction() {
-        imp.println("\t1) Cambiar a Stack de Vectores. \n\t2) Cambiar a Stack de ArrayList \n\t3) Operar instrucciones guardadas en data.txt \n\t4) Salir");
+        imp.println("""
+                1) Cambiar a Vector
+                2) Cambiar a ArrayList
+                3) Cambiar a Lista Encadenada
+                4) Cambiar a Lista Doblemente Encadenada
+                5) Operar data.txt
+                6) Salir
+                """);
         int opcion = EnterOnlyIntegers();
         switch (opcion) {
-            case 1 -> {
-                calculator.ChangeToVector();
-                menuInteraction();
-            }
-            case 2 -> {
-                calculator.ChangeToArray();
-                menuInteraction();
-            }
-            case 3 -> {
-                this.fileControl.DeleteFile(this.resultTarget);
-                this.fileControl.CreateFile(this.resultTarget);
-                Vector<String> lineas = this.fileControl.ReadFile(this.dataTarget);
-                Vector<String> results = new Vector<>();
-                for (int i = 0; i < lineas.size(); i++) {
-                    float result = this.calculator.Operate(lineas.get(i));
-                    results.add(String.valueOf(result));
-                }
-                showResults(results);
-                menuInteraction();
-            }
-            case 4 -> {
-                System.exit(0);
-            }
+            case 1 -> calculator.setStackType(StackType.VECTOR);
+            case 2 -> calculator.setStackType(StackType.ARRAY);
+            case 3 -> calculator.setStackType(StackType.LINKED_LIST);
+            case 4 -> calculator.setStackType(StackType.DOUBLY_LINKED_LIST);
+            case 5 -> operateFile();
+            case 6 -> System.exit(0);
             default -> {
                 imp.println("Invalid option.");
                 menuInteraction();
@@ -78,13 +67,20 @@ public class Controller {
     }
 
     /**
-     * @param results
-     * Shows the results to the User and saves them in another document
+     * Operates the file and shows the result
      */
-    public void showResults(Vector<String> results) {
-        this.fileControl.WriteToTarget(this.resultTarget, results);
-        for (int i = 0; i < results.size(); i++) {
-            imp.println(results.get(i));
+    private void operateFile() {
+        fileControl.DeleteFile(resultTarget);
+        fileControl.CreateFile(resultTarget);
+        Vector<String> lineas = fileControl.ReadFile(dataTarget);
+        Vector<String> results = new Vector<>();
+        for (String linea : lineas) {
+            float result = calculator.Operate(linea);
+            results.add(String.valueOf(result));
+        }
+        fileControl.WriteToTarget(resultTarget, results);
+        for (String r : results) {
+            imp.println(r);
         }
     }
 }
