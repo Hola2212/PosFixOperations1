@@ -42,4 +42,18 @@ public class LinkedListStack<T> implements Stack<T> {
 
         return top.getData();
     }
+    /**
+     * @return True if Stack is Empty, false if not.
+     */
+    @Override
+    public boolean isEmpty() {
+        return top == null;
+    }
+    /**
+     * Clears stack to be used empty.
+     */
+    @Override
+    public void clear() {
+        top = null;
+    }
 }

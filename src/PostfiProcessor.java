@@ -26,6 +26,7 @@ public class PostfiProcessor implements Calc {
      */
     @Override
     public float Operate(String text) {
+        stack.clear();
         String[] tokens = text.split(" ");
         for (String token : tokens) {
 
@@ -48,12 +49,19 @@ public class PostfiProcessor implements Calc {
                 case "/" -> {
                     float a = stack.pop();
                     float b = stack.pop();
+                    if (a == 0){
+                        throw new ArithmeticException("It can't be divided by 0");
+                    }
                     stack.push(b / a);
                 }
                 default -> stack.push(Float.parseFloat(token));
             }
         }
-        return stack.pop();
+        float result = stack.pop();
+        if (!stack.isEmpty()) {
+            throw new IllegalStateException("Invalid postfix expression.");
+        }
+        return result;
     }
 }
 

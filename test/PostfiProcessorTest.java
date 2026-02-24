@@ -94,4 +94,48 @@ class PostfiProcessorTest {
         assertThrows(NumberFormatException.class,
                 () -> calculator.Operate("2 3 &"));
     }
+
+    @Test
+    void stackIsCleanAfterException() {
+        PostfiProcessor calc = PostfiProcessor.getInstance();
+        calc.setStackType(StackType.ARRAY);
+
+        // First call throws exception
+        assertThrows(Exception.class,
+                () -> calc.Operate("5 +"));
+
+        // Second call should work normally (no leftover data)
+        float result = calc.Operate("3 4 +");
+        assertEquals(7.0f, result);
+    }
+
+    @Test
+    void invalidExpressionWithExtraOperandsThrows() {
+        PostfiProcessor calc = PostfiProcessor.getInstance();
+        calc.setStackType(StackType.VECTOR);
+
+        assertThrows(IllegalStateException.class,
+                () -> calc.Operate("3 4 5 +"));
+    }
+
+    @Test
+    void consecutiveOperationsAreIndependent() {
+        PostfiProcessor calc = PostfiProcessor.getInstance();
+        calc.setStackType(StackType.LINKED_LIST);
+
+        float first = calc.Operate("2 3 +");
+        float second = calc.Operate("4 5 +");
+
+        assertEquals(5.0f, first);
+        assertEquals(9.0f, second);
+    }
+
+    @Test
+    void divisionByZeroThrowsException() {
+        PostfiProcessor calc = PostfiProcessor.getInstance();
+        calc.setStackType(StackType.ARRAY);
+
+        assertThrows(ArithmeticException.class,
+                () -> calc.Operate("5 0 /"));
+    }
 }

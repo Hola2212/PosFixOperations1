@@ -37,4 +37,18 @@ public class VectorStack<T> implements Stack<T>{
         }
         return items.get(items.size() - 1);
     }
+    /**
+     * @return True if Stack is Empty, false if not.
+     */
+    @Override
+    public boolean isEmpty() {
+        return items.isEmpty();
+    }
+    /**
+     * Clears stack to be used empty.
+     */
+    @Override
+    public void clear() {
+        items.clear();
+    }
 }
