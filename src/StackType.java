@@ -1,3 +1,6 @@
+/**
+ * Enumeration of available Stack implementations.
+ */
 public enum StackType {
     ARRAY,
     VECTOR,

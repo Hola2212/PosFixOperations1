@@ -1,3 +1,10 @@
+/**
+ * Main controller of the application.
+ *
+ * Handles user interaction, menu navigation, stack type selection,
+ * file operations, and coordination between the infix converter
+ * and postfix calculator.
+ */
 import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.Vector;

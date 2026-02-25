@@ -1,16 +1,34 @@
-
+/**
+ * Converts infix expressions into postfix notation.
+ *
+ * Uses a Stack implementation to apply operator precedence
+ * and correctly transform mathematical expressions.
+ */
 public class InfixProcessor {
 
     private Stack<String> stack;
-
+    /**
+     * Creates an InfixProcessor with a specific Stack implementation.
+     *
+     * @param type The StackType to be used internally
+     */
     public InfixProcessor(StackType type) {
         this.stack = StackFactory.createStack(type);
     }
-
+    /**
+     * Changes the internal Stack implementation.
+     *
+     * @param type The new StackType to use
+     */
     public void setStackType(StackType type){
         this.stack = StackFactory.createStack(type);
     }
-
+    /**
+     * Converts an infix expression into postfix notation.
+     *
+     * @param infix Expression written in infix format
+     * @return Expression converted to postfix format
+     */
     public String convert(String infix) {
 
         stack.clear();
