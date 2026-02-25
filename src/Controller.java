@@ -5,6 +5,7 @@ import java.util.Vector;
 public class Controller {
     private final PrintStream imp;
     private final Scanner sc;
+    private InfixProcessor infixConverter;
     private PostfiProcessor calculator;
     private FilesManagment fileControl;
     private final String dataTarget = "target/data.txt";
@@ -18,6 +19,7 @@ public class Controller {
         this.sc = new Scanner(System.in);
         this.calculator = PostfiProcessor.getInstance();
         this.fileControl = new FilesManagment();
+        this.infixConverter = new InfixProcessor(StackType.VECTOR);
     }
 
     /**
@@ -53,10 +55,22 @@ public class Controller {
                 """);
         int opcion = EnterOnlyIntegers();
         switch (opcion) {
-            case 1 -> calculator.setStackType(StackType.VECTOR);
-            case 2 -> calculator.setStackType(StackType.ARRAY);
-            case 3 -> calculator.setStackType(StackType.LINKED_LIST);
-            case 4 -> calculator.setStackType(StackType.DOUBLY_LINKED_LIST);
+            case 1 -> {
+                calculator.setStackType(StackType.VECTOR);
+                infixConverter.setStackType(StackType.VECTOR);
+            }
+            case 2 -> {
+                calculator.setStackType(StackType.ARRAY);
+                infixConverter.setStackType(StackType.ARRAY);
+            }
+            case 3 -> {
+                calculator.setStackType(StackType.LINKED_LIST);
+                infixConverter.setStackType(StackType.LINKED_LIST);
+            }
+            case 4 -> {
+                calculator.setStackType(StackType.DOUBLY_LINKED_LIST);
+                infixConverter.setStackType(StackType.DOUBLY_LINKED_LIST);
+            }
             case 5 -> operateFile();
             case 6 -> System.exit(0);
             default -> {
@@ -75,7 +89,8 @@ public class Controller {
         Vector<String> lineas = fileControl.ReadFile(dataTarget);
         Vector<String> results = new Vector<>();
         for (String linea : lineas) {
-            float result = calculator.Operate(linea);
+            String postfix = infixConverter.convert(linea);
+            float result = calculator.Operate(postfix);
             results.add(String.valueOf(result));
         }
         fileControl.WriteToTarget(resultTarget, results);
