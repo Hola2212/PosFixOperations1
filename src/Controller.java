@@ -82,7 +82,10 @@ public class Controller {
                 infixConverter.setStackType(StackType.DOUBLY_LINKED_LIST);
                 menuInteraction();
             }
-            case 5 -> operateFile();
+            case 5 -> {
+                operateFile();
+                menuInteraction();
+            }
             case 6 -> System.exit(0);
             default -> {
                 imp.println("Invalid option.");
