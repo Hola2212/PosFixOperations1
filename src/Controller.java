@@ -65,18 +65,22 @@ public class Controller {
             case 1 -> {
                 calculator.setStackType(StackType.VECTOR);
                 infixConverter.setStackType(StackType.VECTOR);
+                menuInteraction();
             }
             case 2 -> {
                 calculator.setStackType(StackType.ARRAY);
                 infixConverter.setStackType(StackType.ARRAY);
+                menuInteraction();
             }
             case 3 -> {
                 calculator.setStackType(StackType.LINKED_LIST);
                 infixConverter.setStackType(StackType.LINKED_LIST);
+                menuInteraction();
             }
             case 4 -> {
                 calculator.setStackType(StackType.DOUBLY_LINKED_LIST);
                 infixConverter.setStackType(StackType.DOUBLY_LINKED_LIST);
+                menuInteraction();
             }
             case 5 -> operateFile();
             case 6 -> System.exit(0);
